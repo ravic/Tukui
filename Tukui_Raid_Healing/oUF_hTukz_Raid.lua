@@ -10,8 +10,6 @@ local frameWidth = C.unitframes.sizes.raidheal.width-4
 local frameHeight = C.unitframes.sizes.raidheal.height-4
 
 local function Shared(self, unit)
-	
-
 	self.colors = T.oUF_colors
 	self:RegisterForClicks("AnyUp")
 	self:SetScript('OnEnter', UnitFrame_OnEnter)
@@ -210,11 +208,11 @@ local function Shared(self, unit)
 	return self
 end
 
-oUF:RegisterStyle('TukuiHealR25R40', Shared)
+oUF:RegisterStyle('TukuiHealRaid', Shared)
 oUF:Factory(function(self)
-	oUF:SetActiveStyle("TukuiHealR25R40")	
+	oUF:SetActiveStyle("TukuiHealRaid")	
 	
-	local raid = self:SpawnHeader("TukuiGrid", nil, "raid,party,solo",
+	local raid = self:SpawnHeader("TukuiHealGrid", nil, "raid,party,solo",
 		'oUF-initialConfigFunction', [[
 			local header = self:GetParent()
 			self:SetWidth(header:GetAttribute('initial-width'))
@@ -223,6 +221,9 @@ oUF:Factory(function(self)
 		'initial-width', T.Scale(frameWidth+4),
 		'initial-height', T.Scale(frameHeight+4),	
 		"showRaid", true,
+		"showParty", true,
+		"showPlayer", C["unitframes"].showplayerinparty,
+		"showSolo", true,
 		"xoffset", T.Scale(3),
 		"yOffset", T.Scale(-3),
 		"point", "LEFT",
@@ -234,7 +235,7 @@ oUF:Factory(function(self)
 		"columnSpacing", T.Scale(3),
 		"columnAnchorPoint", "TOP"		
 	)
-	raid:SetPoint("TOPLEFT", UIParent, "TOPRIGHT", 3, 0)
+	raid:SetPoint("TOPLEFT", TukuiPlayer, "TOPRIGHT", 3, 0)
 end)
 
 -- only show 5 groups in raid (25 mans raid)
@@ -245,8 +246,8 @@ MaxGroup:SetScript("OnEvent", function(self)
 	local inInstance, instanceType = IsInInstance()
 	local _, _, _, _, maxPlayers, _, _ = GetInstanceInfo()
 	if inInstance and instanceType == "raid" and maxPlayers ~= 40 then
-		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5")
+		TukuiHealGrid:SetAttribute("groupFilter", "1,2,3,4,5")
 	else
-		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
+		TukuiHealGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 	end
 end)

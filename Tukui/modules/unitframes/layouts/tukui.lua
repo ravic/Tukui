@@ -52,8 +52,7 @@ local function Shared(self, unit)
 		frameWidth, frameHeight = ufSize["boss"].width, ufSize["boss"].height
 	elseif (self:GetParent():GetName():match"TukuiMainTank" or self:GetParent():GetName():match"TukuiMainAssist") then
 		frameWidth, frameHeight = ufSize["maintank"].width, ufSize["maintank"].height
-	else
-		print(unit)
+	elseif unit=="player" or unit=="target" or unit=="targettarget" or unit=="focus"or unit=="focustarget" or unit=="pet" or unit=="pettarget" then
 		frameWidth, frameHeight = ufSize[unit].width, ufSize[unit].height
 	end
 	
@@ -338,30 +337,26 @@ local function Shared(self, unit)
 			if C["unitframes"].classbar then
 				if T.myclass == "DRUID" then			
 					local eclipseBar = CreateFrame('Frame', nil, self)
-					eclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-					if T.lowversion then
-						eclipseBar:Size(186, 8)
-					else
-						eclipseBar:Size(250, 8)
-					end
+					eclipseBar:Point("BOTTOM", self, "TOP", 0, 3)
+					eclipseBar:Size(frameWidth+4, 8)
 					eclipseBar:SetFrameStrata("MEDIUM")
 					eclipseBar:SetFrameLevel(8)
 					eclipseBar:SetTemplate("Default")
-					eclipseBar:SetBackdropBorderColor(0,0,0,0)
+					eclipseBar:SetBackdropColor(0,0,0)
 					eclipseBar:SetScript("OnShow", function() T.EclipseDisplay(self, false) end)
 					eclipseBar:SetScript("OnUpdate", function() T.EclipseDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
 					eclipseBar:SetScript("OnHide", function() T.EclipseDisplay(self, false) end)
 					
 					local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
-					lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
-					lunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+					lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 2, 0)
+					lunarBar:SetSize(eclipseBar:GetWidth()-4, eclipseBar:GetHeight()-4)
 					lunarBar:SetStatusBarTexture(normTex)
 					lunarBar:SetStatusBarColor(.30, .52, .90)
 					eclipseBar.LunarBar = lunarBar
 
 					local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
 					solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
-					solarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+					solarBar:SetSize(eclipseBar:GetWidth()-4, eclipseBar:GetHeight()-4)
 					solarBar:SetStatusBarTexture(normTex)
 					solarBar:SetStatusBarColor(.80, .82,  .60)
 					eclipseBar.SolarBar = solarBar
@@ -1035,7 +1030,7 @@ local function Shared(self, unit)
 		castbar:SetFrameLevel(6)
 		
 		castbar.bg = CreateFrame("Frame", nil, castbar)
-		castbar.bg:SetTemplate("Default")
+		castbar.bg:SetTemplate("ThickBorder")
 		castbar.bg:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		castbar.bg:Point("TOPLEFT", -2, 2)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
@@ -1059,7 +1054,7 @@ local function Shared(self, unit)
 		castbar.button:Height(castbar:GetHeight()+4)
 		castbar.button:Width(castbar:GetHeight()+4)
 		castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
-		castbar.button:SetTemplate("Default")
+		castbar.button:SetTemplate("ThickBorder")
 		castbar.button:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
@@ -1178,7 +1173,7 @@ local function Shared(self, unit)
 		castbar:SetFrameLevel(6)
 		
 		castbar.bg = CreateFrame("Frame", nil, castbar)
-		castbar.bg:SetTemplate("Default")
+		castbar.bg:SetTemplate("ThickBorder")
 		castbar.bg:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		castbar.bg:Point("TOPLEFT", -2, 2)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
@@ -1202,7 +1197,7 @@ local function Shared(self, unit)
 		castbar.button:Height(castbar:GetHeight()+4)
 		castbar.button:Width(castbar:GetHeight()+4)
 		castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
-		castbar.button:SetTemplate("Default")
+		castbar.button:SetTemplate("ThickBorder")
 		castbar.button:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
@@ -1362,7 +1357,7 @@ local function Shared(self, unit)
 			Trinketbg:SetHeight(26)
 			Trinketbg:SetWidth(26)
 			Trinketbg:SetPoint("RIGHT", self, "LEFT", -6, 0)				
-			Trinketbg:SetTemplate("Default")
+			Trinketbg:SetTemplate("ThickBorder")
 			Trinketbg:SetFrameLevel(0)
 			self.Trinketbg = Trinketbg
 			
@@ -1386,7 +1381,7 @@ local function Shared(self, unit)
 		castbar:SetFrameLevel(6)
 		
 		castbar.bg = CreateFrame("Frame", nil, castbar)
-		castbar.bg:SetTemplate("Default")
+		castbar.bg:SetTemplate("ThickBorder")
 		castbar.bg:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 		castbar.bg:Point("TOPLEFT", -2, 2)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
@@ -1591,9 +1586,6 @@ if C["unitframes"].mainassist == true then
 		assist:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	end
 end
-
--- this is just a fake party to hide Blizzard frame if no Tukui raid layout are loaded.
-local party = oUF:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 
 ------------------------------------------------------------------------
 -- Right-Click on unit frames menu. 

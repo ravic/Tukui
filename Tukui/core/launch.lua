@@ -77,7 +77,12 @@ local function install()
 
 		FCF_OpenNewWindow(LOOT)
 		FCF_DockFrame(ChatFrame4)
-		FCF_SetLocked(ChatFrame4, 1)
+		if C["chat"].undockedLoot == true then
+			FCF_UnDockFrame(ChatFrame4)
+			ChatFrame4:Show()			
+		else
+			FCF_SetLocked(ChatFrame4, 1)
+		end
 
 		for i = 1, NUM_CHAT_WINDOWS do
 			local frame = _G[format("ChatFrame%s", i)]

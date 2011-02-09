@@ -95,6 +95,10 @@ C["unitframes"] = {
 			["width"] = 50,
 			["height"] = 40,
 		},
+		["raiddps"] = {
+			["width"] = 120,
+			["height"] = 12,
+		},
 	}
 }
 
@@ -163,6 +167,7 @@ C["chat"] = {
 	["enable"] = true,                                  -- blah
 	["whispersound"] = true,                            -- play a sound when receiving whisper
 	["background"] = true,
+	["undockedLoot"] = true,							-- set to true to have loot window on the right side of your screen
 }
 
 C["nameplate"] = {
