@@ -14,7 +14,7 @@ for i=1, 12 do
 	b:ClearAllPoints()
 	
 	if i == 1 then
-		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
+		b:SetPoint("TOPLEFT", bar, 0, 0)
 	else
 		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
 	end

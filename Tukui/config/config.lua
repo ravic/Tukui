@@ -24,7 +24,7 @@ C["unitframes"] = {
 	["totdebuffs"] = false,                             -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = true,                         	-- change the display of info text on player with XXXX/Total.
 	["showsmooth"] = true,                              -- enable smooth bar
-	["charportrait"] = true,                           -- do i really need to explain this?
+	["charportrait"] = true,                           	-- do i really need to explain this?
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
 	["unicolor"] = false,                               -- enable unicolor theme
@@ -40,7 +40,7 @@ C["unitframes"] = {
 	["aggro"] = true,                                   -- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
-	["showplayerinparty"] = true,                      -- show my player frame in party
+	["showplayerinparty"] = true,                      	-- show my player frame in party
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
