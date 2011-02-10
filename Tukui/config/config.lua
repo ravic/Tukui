@@ -145,7 +145,7 @@ C["cooldown"] = {
 C["datatext"] = {
 	["fps_ms"] = 4,                                     -- show fps and ms on panels
 	["system"] = 5,                                     -- show total memory and others systems infos on panels
-	["bags"] = 1,                                       -- show space used in bags on panels
+	["bags"] = 0,                                       -- show space used in bags on panels
 	["gold"] = 3,                                       -- show your current gold on panels
 	["wowtime"] = 6,                                    -- show time on panels
 	["guild"] = 0,                                      -- show number on guildmate connected on panels
@@ -162,6 +162,7 @@ C["datatext"] = {
 	["hit"] = 0,
 	["mastery"] = 0,
 	["micromenu"] = 0,
+	["exp_rep"] = 1,									-- show your experience or watched reputation (depending on your level)
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.
