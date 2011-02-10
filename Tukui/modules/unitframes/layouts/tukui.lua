@@ -744,74 +744,134 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "targettarget") then
-		-- create panel if higher version
-		local panel = CreateFrame("Frame", nil, self)
-		panel:SetPoint("CENTER")
-		panel:Height(frameHeight)
-		panel:Width(frameWidth)
-		panel:SetFrameLevel(10)
-		panel:SetFrameStrata("MEDIUM")
-		self.panel = panel
-		
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(frameHeight)
+		health:Height(frameHeight-7)
 		health:Width(frameWidth)
-		health:SetPoint("CENTER")
+		health:SetPoint("TOP", 0, -2)
 		health:SetStatusBarTexture(normTex)
 		
+		
+		-- create a panel for text
+		local panel = CreateFrame("Frame", self:GetName().."_Panel", self)
+		panel:SetFrameStrata("MEDIUM")
+		panel:SetHeight(11)
+		panel:SetFrameLevel(10)
+		panel:SetWidth(frameWidth+2)
+		panel:SetPoint("CENTER", health, "CENTER", 0, 0)
+		panel:SetBackdrop({
+			bgFile = C["media"].blank,  
+			insets = { left = TukuiDB.mult, right = TukuiDB.mult, top = T.mult, bottom = T.mult }
+		})
+		panel:SetBackdropColor(unpack(C["media"].backdropcolor))
+		self.panel = panel
+		
+		panel.topBorder = CreateFrame("frame", nil, panel)
+		panel.topBorder:SetWidth(panel:GetWidth())
+		panel.topBorder:SetHeight(1)
+		panel.topBorder:SetBackdrop({
+			bgFile = C["media"].blank, 
+			edgeFile = C["media"].blank, 
+			edgeSize = T.mult, 
+			insets = { left = 0, right = 0, top = -T.mult, bottom = -T.mult }
+		})
+		panel.topBorder:SetBackdropColor(0, 0, 0)
+		panel.topBorder:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		panel.topBorder:SetPoint("TOP", panel, "BOTTOM", 0, 0)
+		
+		panel.bottomBorder = CreateFrame("frame", nil, panel)
+		panel.bottomBorder:SetWidth(panel:GetWidth())
+		panel.bottomBorder:SetHeight(1)
+		panel.bottomBorder:SetBackdrop({
+			bgFile = C["media"].blank, 
+			edgeFile = C["media"].blank, 
+			edgeSize = T.mult, 
+			insets = { left = 0, right = 0, top = -T.mult, bottom = -T.mult }
+		})
+		panel.bottomBorder:SetBackdropColor(0, 0, 0)
+		panel.bottomBorder:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		panel.bottomBorder:SetPoint("BOTTOM", panel, "TOP", 0, 0)
+		
+		-- health bar background
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(.1, .1, .1)
-		
+				
 		self.Health = health
 		self.Health.bg = healthBG
-		
+
 		health.frequentUpdates = true
 		if C["unitframes"].showsmooth == true then
 			health.Smooth = true
 		end
 		
 		if C["unitframes"].unicolor == true then
+			health.colorTapping = false
 			health.colorDisconnected = false
 			health.colorClass = false
 			health:SetStatusBarColor(.3, .3, .3, 1)
 			healthBG:SetVertexColor(.1, .1, .1, 1)		
 		else
 			health.colorDisconnected = true
+			health.colorTapping = true	
 			health.colorClass = true
 			health.colorReaction = true			
 		end
+
+		local barDivide = CreateFrame("frame", nil, self)
+		barDivide:SetFrameStrata("MEDIUM")
+		barDivide:Width(frameWidth+2)
+		barDivide:Height(1)
+		barDivide:SetBackdrop({
+			bgFile = C["media"].blank, 
+			edgeFile = C["media"].blank, 
+			edgeSize = T.mult, 
+			insets = { left = 0, right = 0, top = -T.mult, bottom = -T.mult }
+		})
+		barDivide:SetBackdropColor(0, 0, 0)
+		barDivide:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+		barDivide:SetPoint("TOP", health, "BOTTOM", 0, -1)
+		
+		-- power
+		local power = CreateFrame('StatusBar', nil, self)
+		power:Height(4)
+		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -3)
+		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -3)
+		power:SetStatusBarTexture(normTex)
+		
+		local powerBG = power:CreateTexture(nil, 'BORDER')
+		powerBG:SetAllPoints(power)
+		powerBG:SetTexture(normTex)
+		powerBG.multiplier = 0.3
+
+		power.PreUpdate = T.PreUpdatePower
+				
+		self.Power = power
+		self.Power.bg = powerBG
+		
+		power.frequentUpdates = true
+		power.colorDisconnected = true
+
+		if C["unitframes"].showsmooth == true then
+			power.Smooth = true
+		end
+		
+		if C["unitframes"].unicolor == true then
+			power.colorTapping = true
+			power.colorClass = true
+			powerBG.multiplier = 0.1				
+		else
+			power.colorPower = true
+		end
 		
 		-- Unit name
-		local Name = health:CreateFontString(nil, "OVERLAY")
-		if T.lowversion then
-			Name:SetPoint("CENTER", health, "CENTER", 0, 0)
-			Name:SetFont(font, fontsize, fontflags, "OUTLINE")
-		else
-			Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
-			Name:SetFont(font, fontsize, fontflags)
-		end
+		local Name = panel:CreateFontString(nil, "OVERLAY")
+		Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
+		Name:SetFont(font, fontsize, fontflags)
 		Name:SetJustifyH("CENTER")
 
 		self:Tag(Name, '[Tukui:diffcolor][Tukui:nameshort]')
 		self.Name = Name
-		
-		if C["unitframes"].totdebuffs == true and T.lowversion ~= true then
-			local debuffs = CreateFrame("Frame", nil, health)
-			debuffs:SetHeight(20)
-			debuffs:SetWidth(127)
-			debuffs.size = 20
-			debuffs.spacing = 2
-			debuffs.num = 6
-
-			debuffs:SetPoint("TOPLEFT", health, "TOPLEFT", -0.5, 24)
-			debuffs.initialAnchor = "TOPLEFT"
-			debuffs["growth-y"] = "UP"
-			debuffs.PostCreateIcon = T.PostCreateAura
-			debuffs.PostUpdateIcon = T.PostUpdateAura
-			self.Debuffs = debuffs
-		end
 	end
 	
 	------------------------------------------------------------------------
@@ -886,13 +946,8 @@ local function Shared(self, unit)
 				
 		-- Unit name
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		if T.lowversion then
-			Name:SetPoint("CENTER", self, "CENTER", 0, 0)
-			Name:SetFont(font, fontsize, fontflags, "OUTLINE")
-		else
-			Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
-			Name:SetFont(font, fontsize, fontflags)
-		end
+		Name:SetPoint("CENTER", panel, "CENTER", 0, 0)
+		Name:SetFont(font, fontsize, fontflags)
 		Name:SetJustifyH("CENTER")
 
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level]')
