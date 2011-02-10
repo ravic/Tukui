@@ -31,7 +31,7 @@ anchor:SetFrameStrata("TOOLTIP")
 anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
 anchor:SetAlpha(0)
-if C.chat.background and TukuiChatBackgroundRight:IsShown() then
+if C.chat.background and TukuiChatBackgroundRight then
 	anchor:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, -TukuiInfoRight:GetHeight())
 else
 	anchor:SetPoint("BOTTOMRIGHT", TukuiInfoRight)
