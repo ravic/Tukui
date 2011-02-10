@@ -935,36 +935,43 @@ local function Shared(self, unit)
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort] [Tukui:diffcolor][level]')
 		self.Name = Name
 		
-		if (C["unitframes"].unitcastbar == true) then
+		if (C["unitframes"].unitcastbar == true) and (unit=="pet") then
 			local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 			castbar:SetStatusBarTexture(normTex)
 			self.Castbar = castbar
 			
-			if not T.lowversion then
-				castbar.bg = castbar:CreateTexture(nil, "BORDER")
-				castbar.bg:SetAllPoints(castbar)
-				castbar.bg:SetTexture(normTex)
-				castbar.bg:SetVertexColor(0.15, 0.15, 0.15)
-				castbar:SetFrameLevel(6)
-				castbar:Point("TOPLEFT", panel, 2, -2)
-				castbar:Point("BOTTOMRIGHT", panel, -2, 2)
+			castbar.border = CreateFrame("frame", nil, castbar)
+			castbar.border:SetPoint("BOTTOM", self, "TOP", 0, 3)
+			castbar.border:Width(frameWidth+4)
+			castbar.border:Height(13)
+			castbar.border:SetTemplate("ThickBorder")
+			castbar.border:SetFrameStrata("BACKGROUND")
+			castbar.border:SetFrameLevel(0)
+			
+			castbar.bg = castbar:CreateTexture(nil, "BORDER")
+			castbar.bg:SetAllPoints(castbar)
+			castbar.bg:SetTexture(normTex)
+			castbar.bg:SetVertexColor(0.15, 0.15, 0.15)
+			castbar:SetFrameLevel(6)
+			castbar:Point("TOPLEFT", castbar.border, 2, -2)
+			castbar:Point("BOTTOMRIGHT", castbar.border, -2, 2)
+			
 				
-				castbar.CustomTimeText = T.CustomCastTimeText
-				castbar.CustomDelayText = T.CustomCastDelayText
-				castbar.PostCastStart = T.CheckCast
-				castbar.PostChannelStart = T.CheckChannel
+			castbar.CustomTimeText = T.CustomCastTimeText
+			castbar.CustomDelayText = T.CustomCastDelayText
+			castbar.PostCastStart = T.CheckCast
+			castbar.PostChannelStart = T.CheckChannel
 
-				castbar.time = T.SetFontString(castbar, font, fontsize, fontflags)
-				castbar.time:Point("RIGHT", panel, "RIGHT", -4, 0)
-				castbar.time:SetTextColor(0.84, 0.75, 0.65)
-				castbar.time:SetJustifyH("RIGHT")
+			castbar.time = T.SetFontString(castbar, font, fontsize, fontflags)
+			castbar.time:Point("RIGHT", castbar, "RIGHT", -1, 0)
+			castbar.time:SetTextColor(0.84, 0.75, 0.65)
+			castbar.time:SetJustifyH("RIGHT")
 
-				castbar.Text = T.SetFontString(castbar, font, fontsize, fontflags)
-				castbar.Text:Point("LEFT", panel, "LEFT", 4, 0)
-				castbar.Text:SetTextColor(0.84, 0.75, 0.65)
+			castbar.Text = T.SetFontString(castbar, font, fontsize, fontflags)
+			castbar.Text:Point("LEFT", castbar, "LEFT", 1, 0)
+			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 				
-				self.Castbar.Time = castbar.time
-			end
+			self.Castbar.Time = castbar.time
 		end
 		
 		-- update pet name, this should fix "UNKNOWN" pet names on pet unit, health and bar color sometime being "grayish".
