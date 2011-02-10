@@ -644,7 +644,7 @@ T.HidePortrait = function(self, unit)
 		if not UnitExists(self.unit) or not UnitIsConnected(self.unit) or not UnitIsVisible(self.unit) then
 			self.Portrait:SetAlpha(0)
 		else
-			self.Portrait:SetAlpha(1)
+			self.Portrait:SetAlpha(0.2)
 		end
 	end
 end

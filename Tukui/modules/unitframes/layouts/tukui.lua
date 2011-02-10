@@ -222,27 +222,9 @@ local function Shared(self, unit)
 		if (C["unitframes"].charportrait == true) then
 			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
 			portrait:SetFrameLevel(8)
-			portrait:SetHeight(57)
-			portrait:SetWidth(33)
-			portrait:SetAlpha(1)
-			if unit == "player" then
-				health:SetPoint("TOPLEFT", 34,0)
-				health:SetPoint("TOPRIGHT")
-				power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-				power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
-				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
-				panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
-				portrait:SetPoint("TOPLEFT", health, "TOPLEFT", -34,0)
-			elseif unit == "target" then
-				health:SetPoint("TOPRIGHT", -34,0)
-				health:SetPoint("TOPLEFT")
-				power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
-				power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-				panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
-				panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
-				portrait:SetPoint("TOPRIGHT", health, "TOPRIGHT", 34,0)
-			end
-			panel:SetWidth(panel:GetWidth() - 34) -- panel need to be resized if charportrait is enabled
+			portrait:SetAlpha(0.2)
+			portrait:SetPoint("TOPLEFT", health, "TOPLEFT", 0, 0)
+			portrait:SetPoint("BOTTOMRIGHT", panel, "TOPRIGHT", 0, 2)
 			table.insert(self.__elements, T.HidePortrait)
 			self.Portrait = portrait
 		end
@@ -870,7 +852,7 @@ local function Shared(self, unit)
 		Name:SetFont(font, fontsize, fontflags)
 		Name:SetJustifyH("CENTER")
 
-		self:Tag(Name, '[Tukui:diffcolor][Tukui:nameshort]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:nameshort]')
 		self.Name = Name
 	end
 	
@@ -1070,7 +1052,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(0,0)
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:diffcolor][Tukui:namelong]')
 		self.Name = Name
 
 		-- create debuff for arena units
@@ -1213,7 +1195,7 @@ local function Shared(self, unit)
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(0,0)
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:diffcolor][Tukui:namelong]')
 		self.Name = Name
 
 		-- create debuff for arena units
