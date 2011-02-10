@@ -229,7 +229,7 @@ T.Round = function(number, decimals)
     return (("%%.%df"):format(decimals)):format(number)
 end
 
-T.RGBPercToHex = function(r, g, b)
+T.RGBToHex = function(r, g, b)
 	r = r <= 1 and r >= 0 and r or 0
 	g = g <= 1 and g >= 0 and g or 0
 	b = b <= 1 and b >= 0 and b or 0
@@ -655,7 +655,7 @@ T.HidePortrait = function(self, unit)
 		if not UnitExists(self.unit) or not UnitIsConnected(self.unit) or not UnitIsVisible(self.unit) then
 			self.Portrait:SetAlpha(0)
 		else
-			self.Portrait:SetAlpha(0.2)
+			self.Portrait:SetAlpha(C.unitframes.portraitalpha)
 		end
 	end
 end
@@ -664,9 +664,9 @@ local CheckInterrupt = function(self, unit)
 	if unit == "vehicle" then unit = "player" end
 
 	if self.interrupt and UnitCanAttack("player", unit) then
-		self:SetStatusBarColor(1, 0, 0, 0.5)	
+		self:SetStatusBarColor(unpack(C.unitframes.cbintercolor))	
 	else
-		self:SetStatusBarColor(0.31, 0.45, 0.63, 0.5)		
+		self:SetStatusBarColor(unpack(C.unitframes.cbregcolor))		
 	end
 end
 

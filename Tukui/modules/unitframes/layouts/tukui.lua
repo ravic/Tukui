@@ -222,7 +222,7 @@ local function Shared(self, unit)
 		if (C["unitframes"].charportrait == true) then
 			local portrait = CreateFrame("PlayerModel", self:GetName().."_Portrait", self)
 			portrait:SetFrameLevel(8)
-			portrait:SetAlpha(0.2)
+			portrait:SetAlpha(C.unitframes.portraitalpha)
 			portrait:SetPoint("TOPLEFT", health, "TOPLEFT", 0, 0)
 			portrait:SetPoint("BOTTOMRIGHT", panel, "TOPRIGHT", 0, 2)
 			table.insert(self.__elements, T.HidePortrait)

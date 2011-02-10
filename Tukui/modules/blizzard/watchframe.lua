@@ -16,7 +16,7 @@ TukuiWatchFrameAnchor:SetMovable(true)
 TukuiWatchFrameAnchor:SetTemplate("Default")
 TukuiWatchFrameAnchor:SetBackdropBorderColor(0,0,0,0)
 TukuiWatchFrameAnchor:SetBackdropColor(0,0,0,0)
-TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffont, C.media.uffontsize, C.media.uffontflags)
+TukuiWatchFrameAnchor.text = T.SetFontString(TukuiWatchFrameAnchor, C.media.uffont, 12)
 TukuiWatchFrameAnchor.text:SetPoint("CENTER")
 TukuiWatchFrameAnchor.text:SetText(L.move_watchframe)
 TukuiWatchFrameAnchor.text:Hide()
@@ -71,8 +71,21 @@ local function setup()
 
 	WatchFrameTitle:SetParent(TukuiWatchFrame)
 	WatchFrameCollapseExpandButton:SetParent(TukuiWatchFrame)
+	WatchFrameCollapseExpandButton:SetNormalTexture("")
+	WatchFrameCollapseExpandButton:SetPushedTexture("")
+	WatchFrameCollapseExpandButton:SetHighlightTexture("")
+	WatchFrameCollapseExpandButton:SetTemplate("Default")
+	WatchFrameCollapseExpandButton.text = T.SetFontString(WatchFrameCollapseExpandButton, C.media.uffont, C.media.uffontsize)
+	WatchFrameCollapseExpandButton.text:SetText("X")
+	WatchFrameCollapseExpandButton.text:Point("CENTER", 1, 0)
+	WatchFrameCollapseExpandButton:HookScript("OnClick", function(self) 
+		if WatchFrame.collapsed then 
+			self.text:SetText("V") 
+		else 
+			self.text:SetText("X")
+		end 
+	end)
 	WatchFrameTitle:Kill()
-	WatchFrameCollapseExpandButton:Kill()
 end
 
 ------------------------------------------------------------------------

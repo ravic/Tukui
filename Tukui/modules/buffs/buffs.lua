@@ -1,5 +1,5 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C.auras.player then return end
+if (C.auras.player ~= true) or (C.unitframes.playerauras) then return end
 
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
@@ -183,9 +183,6 @@ local function CreateAuraHeader(filter, ...)
 
 	return header
 end
-
-BuffFrame:Kill()
-TemporaryEnchantFrame:Kill()
 
 ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", Minimap, "TOPLEFT", -10, 0))
 ScanAuras(CreateAuraHeader("HARMFUL", "BOTTOMRIGHT", Minimap, "BOTTOMLEFT", -10, 0))

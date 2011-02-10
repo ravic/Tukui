@@ -259,6 +259,20 @@ local function StyleButton(b, c)
 	end
 end
 
+local function FontString(parent, name, fontName, fontHeight, fontStyle)
+	local fs = parent:CreateFontString(nil, "OVERLAY")
+	fs:SetJustifyH("LEFT")
+	fs:SetShadowOffset(0,0)
+	
+	if not name then
+		parent.text = fs
+	else
+		parent[name] = fs
+	end
+	
+	return fs
+end
+
 local function addapi(object)
 	local mt = getmetatable(object).__index
 	mt.Size = Size
@@ -271,6 +285,7 @@ local function addapi(object)
 	mt.StyleButton = StyleButton
 	mt.Width = Width
 	mt.Height = Height
+	mt.FontString = FontString
 end
 
 local handled = {["Frame"] = true}

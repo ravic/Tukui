@@ -51,8 +51,8 @@ local function ShowOrHideBar(bar, button)
 				for i = 7, 12 do
 					local left = _G["MultiBarBottomLeftButton"..i]
 					local right = _G["MultiBarBottomRightButton"..i]
-					left:Hide()
-					right:Hide()
+					left:SetAlpha(0)
+					right:SetAlpha(0)
 				end
 			end
 		end
@@ -82,8 +82,8 @@ local function ShowOrHideBar(bar, button)
 				for i = 7, 12 do
 					local left = _G["MultiBarBottomLeftButton"..i]
 					local right = _G["MultiBarBottomRightButton"..i]
-					left:Show()
-					right:Show()
+					left:SetAlpha(1)
+					right:SetAlpha(1)
 				end	
 			end
 		end
