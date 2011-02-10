@@ -227,8 +227,8 @@ oUF:Factory(function(self)
 		"xoffset", T.Scale(3),
 		"yOffset", T.Scale(-3),
 		"point", "LEFT",
-		"groupFilter", "1,2,3,4,5,6,7,8",
-		"groupingOrder", "1,2,3,4,5,6,7,8",
+		"groupFilter", "1,2,3,4,5",
+		"groupingOrder", "1,2,3,4,5",
 		"groupBy", "GROUP",
 		"maxColumns", 8,
 		"unitsPerColumn", 5,
@@ -238,7 +238,7 @@ oUF:Factory(function(self)
 	raid:SetPoint("TOPLEFT", TukuiPlayer, "TOPRIGHT", 3, 0)
 end)
 
--- only show 5 groups in raid (25 mans raid)
+--[[ only show 5 groups in raid (25 mans raid)
 local MaxGroup = CreateFrame("Frame")
 MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
 MaxGroup:RegisterEvent("ZONE_CHANGED_NEW_AREA")
@@ -250,4 +250,4 @@ MaxGroup:SetScript("OnEvent", function(self)
 	else
 		TukuiHealGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 	end
-end)
+end) ]]
