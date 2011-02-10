@@ -19,3 +19,7 @@ if T.myname == "Tukz" then
 	C.actionbar.hideshapeshift = true
 	C.unitframes.enemyhcolor = true
 end
+
+if T.myname == "Safturento" then
+	C.unitframes.cbposition = false
+end

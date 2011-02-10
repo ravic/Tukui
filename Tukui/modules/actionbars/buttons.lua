@@ -206,7 +206,7 @@ TukuiBar3Button.text:SetText("|cff4BAF4C<|r")
 
 local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent)
 TukuiBar4Button:SetWidth(TukuiBar1:GetWidth())
-TukuiBar4Button:Height(10)
+TukuiBar4Button:Height(12)
 TukuiBar4Button:Point("TOP", TukuiBar1, "BOTTOM", 0, -3)
 TukuiBar4Button:SetTemplate("ThickBorder")
 TukuiBar4Button:RegisterForClicks("AnyUp")

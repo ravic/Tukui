@@ -608,9 +608,21 @@ local function Shared(self, unit)
 			castbar.bg:SetVertexColor(0.15, 0.15, 0.15)
 			
 			castbar:SetFrameLevel(6)
-			castbar:Point("TOP", self, "BOTTOM",  0, -5)
-			castbar:SetWidth(frameWidth)
-			castbar:SetHeight(12)
+			if C.unitframes.cbposition == true then
+				if unit == "player" then
+					castbar:Point("BOTTOM", TukuiBar1, "TOP",  0, 5)
+					castbar:SetWidth(TukuiBar1:GetWidth()-4)
+					castbar:SetHeight(20)
+				else
+					castbar:Point("BOTTOM", TukuiBar1, "TOP",  0, 32)
+					castbar:SetWidth(TukuiBar1:GetWidth()-4)
+					castbar:SetHeight(20)
+				end
+			else
+				castbar:Point("TOP", self, "BOTTOM",  0, -5)
+				castbar:SetWidth(frameWidth)
+				castbar:SetHeight(12)
+			end
 			
 			castbar.border = CreateFrame("frame", nil, castbar)
 			castbar.border:SetPoint("TOPLEFT", castbar, "TOPLEFT", -2, 2)
