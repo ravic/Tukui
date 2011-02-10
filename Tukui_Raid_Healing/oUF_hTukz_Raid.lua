@@ -220,7 +220,7 @@ oUF:Factory(function(self)
 		]],
 		'initial-width', T.Scale(frameWidth+4),
 		'initial-height', T.Scale(frameHeight+4),	
-		"showRaid", true,
+		"showRaid", false,
 		"showParty", true,
 		"showPlayer", C["unitframes"].showplayerinparty,
 		"showSolo", true,

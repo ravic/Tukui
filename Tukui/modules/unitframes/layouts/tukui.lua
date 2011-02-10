@@ -1268,9 +1268,9 @@ local function Shared(self, unit)
 		
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(22)
-		health:SetPoint("TOPLEFT")
-		health:SetPoint("TOPRIGHT")
+		health:Height(frameHeight-4)
+		health:Width(frameWidth)
+		health:SetPoint("TOP", 0, -2)
 		health:SetStatusBarTexture(normTex)
 
 		health.frequentUpdates = true
@@ -1309,7 +1309,7 @@ local function Shared(self, unit)
 	
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(6)
+		power:Height(3)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 		power:SetStatusBarTexture(normTex)

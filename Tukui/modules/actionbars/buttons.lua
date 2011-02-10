@@ -42,7 +42,7 @@ local function ShowOrHideBar(bar, button)
 		
 		-- for bar 2½+3½+4, high reso only
 		if bar == TukuiBar4 then
-			TukuiBar1:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
+			TukuiBar1:SetHeight(T.buttonsize * 1)
 			TukuiBar2:SetHeight(T.buttonsize)
 			TukuiBar3:SetHeight(T.buttonsize)
 			TukuiBar2Button:SetHeight(T.buttonsize)
@@ -73,7 +73,7 @@ local function ShowOrHideBar(bar, button)
 		
 		-- for bar 2½+3½+4, high reso only
 		if bar == TukuiBar4 then
-			TukuiBar1:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
+			TukuiBar1:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 			TukuiBar2:SetHeight(TukuiBar4:GetHeight())
 			TukuiBar3:SetHeight(TukuiBar4:GetHeight())
 			TukuiBar2Button:SetHeight(TukuiBar2:GetHeight())
