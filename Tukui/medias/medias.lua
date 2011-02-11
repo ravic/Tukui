@@ -47,3 +47,7 @@ C["media"] = {
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],
 	["warning"] = [[Interface\AddOns\Tukui\medias\sounds\warning.mp3]],
 }
+
+if C.general.alternateFont == true then 
+	C.media.uffont = [[Interface\Addons\Tukui\medias\fonts\SEMPRG__.TTF]], -- general font of unitframes
+end
