@@ -528,17 +528,9 @@ local function Shared(self, unit)
 			local debuffs = CreateFrame("Frame", nil, self)
 			
 			if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK") and (C["unitframes"].playerauras) and (unit == "player") then
-				if T.lowversion then
-					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 34)
-				else
-					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 38)
-				end
+				buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 38)
 			else
-				if T.lowversion then
-					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 26)
-				else
-					buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 30)
-				end
+				buffs:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 30)
 			end
 
 			buffs.size = 23
@@ -660,12 +652,8 @@ local function Shared(self, unit)
 		-- add combat feedback support
 		if C["unitframes"].combatfeedback == true then
 			local CombatFeedbackText 
-			if T.lowversion then
-				CombatFeedbackText = T.SetFontString(health, font, fontsize, fontflags, "OUTLINE")
-			else
-				CombatFeedbackText = T.SetFontString(health, font, 14, "OUTLINE")
-			end
-			CombatFeedbackText:SetPoint("CENTER", 0, 1)
+			CombatFeedbackText = T.SetFontString(panel, font, fontsize, fontflags)
+			CombatFeedbackText:SetPoint("CENTER", health, "BOTTOM", 0, 1)
 			CombatFeedbackText.colors = {
 				DAMAGE = {0.69, 0.31, 0.31},
 				CRUSHING = {0.69, 0.31, 0.31},

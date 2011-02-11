@@ -87,6 +87,13 @@ local function Shared(self, unit)
     panel:SetPoint("BOTTOM", 0,0)
 	self.panel = panel
 	
+	local name = health:CreateFontString(nil, "OVERLAY")
+    name:SetPoint("BOTTOM", health, "CENTER", 0, 2)
+	name:SetFont(font, fontsize, fontflags)
+	name:SetShadowOffset(1, -1)
+	self:Tag(name, "[Tukui:nameshort]")
+	self.Name = name
+	
     if C["unitframes"].aggro == true then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', T.UpdateThreat)
@@ -223,7 +230,7 @@ oUF:Factory(function(self)
 		"showRaid", false,
 		"showParty", true,
 		"showPlayer", C["unitframes"].showplayerinparty,
-		"showSolo", true,
+		"showSolo", false,
 		"xoffset", T.Scale(3),
 		"yOffset", T.Scale(-3),
 		"point", "LEFT",
