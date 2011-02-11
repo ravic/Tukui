@@ -30,7 +30,7 @@ if C["datatext"].exp_rep and C["datatext"].exp_rep > 0 then
 			local restXP = GetXPExhaustion()
 			Text:SetTextColor(1,1,1)
 			if restXP then
-				Text:SetText("|cffc21bd1"..T.ShortValue(XP).."/"..T.ShortValue(maxXP).."|cff0096ff+"..T.ShortValue(restXP).."|r")
+				Text:SetText("|cffb18ce3"..T.ShortValue(XP).."/"..T.ShortValue(maxXP).."|cff7fcaff+"..T.ShortValue(restXP).."|r")
 			else
 				Text:SetText(T.ShortValue(XP).."/"..T.ShortValue(maxXP))
 			end
@@ -64,7 +64,7 @@ if C["datatext"].exp_rep and C["datatext"].exp_rep > 0 then
 			GameTooltip:AddLine("XP: "..T.CommaValue(XP).."/"..T.CommaValue(maxXP).."("..floor(XP/maxXP*100).."%)")
 			GameTooltip:AddLine("Remaining: -"..T.CommaValue(maxXP-XP))
 			if restXP then
-				GameTooltip:AddLine("|cff0096ffRested: "..T.CommaValue(restXP).."("..floor(restXP/maxXP*100).."%)|r")
+				GameTooltip:AddLine("|cffb18ce3Rested: "..T.CommaValue(restXP).."("..floor(restXP/maxXP*100).."%)|r")
 			end
 		end
 		if GetWatchedFactionInfo() then
