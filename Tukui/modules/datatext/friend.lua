@@ -12,6 +12,7 @@ Stat:SetFrameLevel(3)
 
 local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 Text:SetFont(C.media.uffont, C.media.uffontsize, C.media.uffontflags)
+Text:SetShadowOffset(T.mult, -T.mult)
 T.PP(C["datatext"].friends, Text)
 
 local menuFrame = CreateFrame("Frame", "TukuiFriendRightClickMenu", UIParent, "UIDropDownMenuTemplate")
