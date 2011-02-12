@@ -97,8 +97,8 @@ local function Shared(self, unit)
 	local name = health:CreateFontString(nil, "OVERLAY")
     name:SetPoint("BOTTOM", health, "CENTER", 0, 2)
 	name:SetFont(font, fontsize, fontflags)
-	name:SetShadowOffset(1, -1)
-	self:Tag(name, "[Tukui:nameshort]")
+	name:SetShadowOffset(0,0)
+	self:Tag(name, "[Tukui:nametiny]")
 	self.Name = name
 	
     if C["unitframes"].aggro == true then
