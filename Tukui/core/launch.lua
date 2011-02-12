@@ -315,7 +315,7 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 		StaticPopup_Show("TUKUIDISABLE_RAID")
 	end
 	
-	print(L.core_welcome1..T.version)
+	print("Welcome to |cffe76a6aSaft's|r v"..T.subversion.." edit of |cffC495DDTukui|r v"..T.version)
 	print(L.core_welcome2)
 end)
 

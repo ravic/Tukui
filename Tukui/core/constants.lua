@@ -10,6 +10,7 @@ T.getscreenheight = tonumber(string.match(({GetScreenResolutions()})[GetCurrentR
 T.getscreenwidth = tonumber(string.match(({GetScreenResolutions()})[GetCurrentResolution()], "(%d+)x+%d"))
 T.version = GetAddOnMetadata("Tukui", "Version")
 T.versionnumber = tonumber(T.version)
+T.subversion = GetAddOnMetadata("Tukui", "X-SubVersion")
 T.incombat = UnitAffectingCombat("player")
 T.patch = GetBuildInfo()
 T.level = UnitLevel("player")
