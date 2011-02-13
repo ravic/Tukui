@@ -11,7 +11,7 @@ TukuiBar1:SetFrameStrata("BACKGROUND")
 TukuiBar1:SetFrameLevel(1)
 
 local TukuiBar2 = CreateFrame("Frame", "TukuiBar2", UIParent)
-TukuiBar2:CreatePanel("Invisible", 1, 1, "BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -6, 0)
+TukuiBar2:CreatePanel("Invisible", 1, 1, "BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -10, 0)
 TukuiBar2:SetWidth((T.buttonsize * sbWidth) + (T.buttonspacing * (sbWidth-1)))
 TukuiBar2:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 TukuiBar2:SetFrameStrata("BACKGROUND")
@@ -23,7 +23,7 @@ else
 end
 
 local TukuiBar3 = CreateFrame("Frame", "TukuiBar3", UIParent)
-TukuiBar3:CreatePanel("Invisible", 1, 1, "BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 6, 0)
+TukuiBar3:CreatePanel("Invisible", 1, 1, "BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 10, 0)
 TukuiBar3:SetWidth((T.buttonsize * sbWidth) + (T.buttonspacing * (sbWidth-1)))
 TukuiBar3:SetHeight((T.buttonsize * 2) + (T.buttonspacing))
 TukuiBar3:SetFrameStrata("BACKGROUND")
