@@ -636,6 +636,12 @@ T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, 
 			icon:SetBackdropBorderColor(color.r * 0.6, color.g * 0.6, color.b * 0.6)
 			icon.icon:SetDesaturated(false)
 		end
+	else
+		if (isStealable or ((TukuiDB.myclass == "MAGE" or TukuiDB.myclass == "PRIEST" or TukuiDB.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
+			icon:SetBackdropBorderColor(1, 0.85, 0)
+		else
+			icon:SetBackdropBorderColor(unpack(TukuiCF.media.bordercolor))
+		end
 	end
 	
 	if duration and duration > 0 then
