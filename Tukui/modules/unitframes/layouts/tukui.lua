@@ -101,7 +101,11 @@ local function Shared(self, unit)
 		-- create a panel for text
 		local panel = CreateFrame("Frame", self:GetName().."_Panel", self)
 		panel:SetFrameStrata("MEDIUM")
-		panel:SetHeight(11)
+		if C["general"].alternateFont == true then
+			panel:Height(13)
+		else
+			panel:Height(11)
+		end
 		panel:SetFrameLevel(10)
 		panel:SetWidth(frameWidth+2)
 		panel:SetPoint("CENTER", health, "CENTER", 0, 0)

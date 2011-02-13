@@ -11,16 +11,18 @@ local aggroColors = {
 }
 
 -- create the bar
-local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoRight)
-TukuiThreatBar:Point("TOPLEFT", 2, -2)
-TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
+local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiTarget_Panel)
+TukuiThreatBar:Point("TOPLEFT", 1, -0)
+TukuiThreatBar:Point("BOTTOMRIGHT", -1, 0)
+TukuiThreatBar:SetFrameStrata("MEDIUM")
+TukuiThreatBar:SetFrameLevel(10)
 
 TukuiThreatBar:SetStatusBarTexture(C.media.normTex)
 TukuiThreatBar:GetStatusBarTexture():SetHorizTile(false)
-TukuiThreatBar:SetBackdrop({bgFile = C.media.blank})
-TukuiThreatBar:SetBackdropColor(0, 0, 0, 0)
+-- TukuiThreatBar:SetBackdrop({bgFile = C.media.blank})
+-- TukuiThreatBar:SetBackdropColor(0, 0, 0, 0)
 TukuiThreatBar:SetMinMaxValues(0, 100)
-
+--[[
 TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.uffont, C.media.uffontsize, C.media.uffontflags)
 TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
 
@@ -31,7 +33,7 @@ TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
 TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
 TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)
 TukuiThreatBar.bg:SetTexture(0.1,0.1,0.1)
-
+]]
 -- event func
 local function OnEvent(self, event, ...)
 	local party = GetNumPartyMembers()
@@ -68,7 +70,7 @@ local function OnUpdate(self, event, unit)
 		local threatval = threatpct or 0
 		
 		self:SetValue(threatval)
-		self.text:SetFormattedText("%3.1f", threatval)
+		-- self.text:SetFormattedText("%3.1f", threatval)
 		
 		if( threatval < 30 ) then
 			self:SetStatusBarColor(unpack(self.Colors[1]))
