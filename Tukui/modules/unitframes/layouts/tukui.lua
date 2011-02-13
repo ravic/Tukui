@@ -1585,16 +1585,17 @@ if C.arena.unitframes then
 	end
 end
 
-if C["unitframes"].showboss then
-	for i = 1,MAX_BOSS_FRAMES do
-		local t_boss = _G["Boss"..i.."TargetFrame"]
-		t_boss:UnregisterAllEvents()
-		t_boss.Show = T.dummy
-		t_boss:Hide()
-		_G["Boss"..i.."TargetFrame".."HealthBar"]:UnregisterAllEvents()
-		_G["Boss"..i.."TargetFrame".."ManaBar"]:UnregisterAllEvents()
-	end
+--Hide boss frames even if showboss is set to false.
+for i = 1,MAX_BOSS_FRAMES do
+	local t_boss = _G["Boss"..i.."TargetFrame"]
+	t_boss:UnregisterAllEvents()
+	t_boss.Show = T.dummy
+	t_boss:Hide()
+	_G["Boss"..i.."TargetFrame".."HealthBar"]:UnregisterAllEvents()
+	_G["Boss"..i.."TargetFrame".."ManaBar"]:UnregisterAllEvents()
+end
 
+if C["unitframes"].showboss then
 	local boss = {}
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
